@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  starwars:
+    container_name: starwars_mysql
+    image: mysql
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=stw123
+      - MYSQL_DATABASE=starwars
+      - MYSQL_USER=stw
+      - MYSQL_PASSWORD=stw123
+    volumes:
+      - "./init:/docker-entrypoint-initdb.d"
+      
+#docker-compose up
+
+#docer exec -it starwars_mysql bash
+
+#mysql -u stw -p
+#stw123
+
+#use starwars;
