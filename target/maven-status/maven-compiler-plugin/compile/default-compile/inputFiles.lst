@@ -1,12 +1,12 @@
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/dao/PlanetDAO.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/service/PlanetService.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/publicapi/StarWars.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/StarWarsPlanetsApplication.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/model/Terrain.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/publicapi/PlanetPublicAPI.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/model/Planet.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/controller/PlanetController.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/service/impl/PlanetServiceImpl.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/publicapi/SWModelList.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/model/Climate.java
-/home/brunomathidios/workspace-sts/Spring Boot/JPA/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/publicapi/StarWarsApi.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/dao/PlanetDAO.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/model/Planet.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/model/Climate.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/model/Terrain.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/StarWarsPlanetsApplication.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/swapi/SWModel.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/service/PlanetService.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/service/impl/PlanetServiceImpl.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/swapi/PlanetSWAPI.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/swapi/StarWarsApi.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/controller/PlanetController.java
+/home/brunomathidios-eds/workspace/Bit/StarWarsRestAPI/src/main/java/br/com/mathidios/starwarsplanets/swapi/StarWars.java

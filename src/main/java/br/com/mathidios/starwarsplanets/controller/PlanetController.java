@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.mathidios.starwarsplanets.publicapi.PlanetPublicAPI;
-import br.com.mathidios.starwarsplanets.publicapi.SWModelList;
-import br.com.mathidios.starwarsplanets.publicapi.StarWars;
-import br.com.mathidios.starwarsplanets.publicapi.StarWarsApi;
 import br.com.mathidios.starwarsplanets.service.PlanetService;
+import br.com.mathidios.starwarsplanets.swapi.PlanetSWAPI;
+import br.com.mathidios.starwarsplanets.swapi.SWModel;
+import br.com.mathidios.starwarsplanets.swapi.StarWars;
+import br.com.mathidios.starwarsplanets.swapi.StarWarsApi;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -22,28 +22,25 @@ public class PlanetController {
 	private PlanetService planetService;
 	
 	@GetMapping("/{nmPlanet}")
-	public void getAllPlanetsPublicAPI(@PathVariable(name="nmPlanet") String nmPlanet) throws Exception{
+	public void getAllPlanetsPublicAPI(@PathVariable(name="nmPlanet") String nmPlanet) throws Exception {
+		
+		int filmsNumber = this.getFilmsNumberFromStarWarsAPIByPlanetName(nmPlanet);
+	}
+
+	private int getFilmsNumberFromStarWarsAPIByPlanetName(String nmPlanet) throws Exception {
 		StarWars api = StarWarsApi.getApi();
 		
-		//Call<SWModelList<PlanetPublicAPI>> planets = api.getAllPlanets(null);
-		Call<SWModelList<PlanetPublicAPI>> planets = api.getPlanetByName(nmPlanet);
+		Call<SWModel> planets = api.getPlanetByName(nmPlanet);
 		
-		Response<SWModelList<PlanetPublicAPI>> response = planets.execute();
-		
-		//Response<SWModelList<PlanetPublicAPI>> response = planets.execute();
+		Response<SWModel> response = planets.execute();
 		
 		if (response.isSuccessful()) {
-            SWModelList<PlanetPublicAPI> data = response.body();
-            for (PlanetPublicAPI planet : data.results) {
-            	System.out.println("Planet: " + planet.name + " " + planet.climate + " " + planet.population);
-            }
-		
+            SWModel data = response.body();
+            PlanetSWAPI planet = data.getResults().get(0);
+            System.out.println("Planet: " + planet.getName() + " films: " + (planet.getFilms() != null && !planet.getFilms().isEmpty() ? planet.getFilms().size() : 0));
+        	return planet.getFilms() != null && !planet.getFilms().isEmpty() ? planet.getFilms().size() : 0;
+		} else {
+			return 0;
 		}
-		
-	}
-	
-	@GetMapping("/teste")
-	public String teste() {
-		return "teste da aplicação star wars";
 	}
 }
