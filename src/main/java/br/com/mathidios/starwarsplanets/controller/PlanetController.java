@@ -34,6 +34,34 @@ public class PlanetController {
 	@Autowired
 	private PlanetService planetService;
 	
+	@GetMapping("/films/{nmPlanet}")
+	public ResponseEntity<Integer> getNumberOfFilmsFromPlanetNameOnSWAPI(@PathVariable(name="nmPlanet") String nmPlanet) throws Exception{
+		return Optional
+		        .ofNullable( this.getFilmsNumberFromStarWarsAPIByPlanetName(nmPlanet) )
+		        .map( numberOfFilms -> ResponseEntity.ok().body(numberOfFilms) ) 
+		        .orElseGet( () -> ResponseEntity.notFound().build() ); 
+	}
+
+	private int getFilmsNumberFromStarWarsAPIByPlanetName(String nmPlanet) throws Exception {
+		StarWars api = StarWarsApi.getApi();
+		
+		Call<SWModel> planets = api.getPlanetByName(nmPlanet);
+		
+		Response<SWModel> response = planets.execute();
+		
+		if (response.isSuccessful()) {
+            SWModel data = response.body();
+            
+            if(data.getResults() != null && !data.getResults().isEmpty()) {
+            	
+            	PlanetSWAPI planet = data.getResults().get(0);
+            	log.debug("Planet: " + planet.getName() + " films: " + (planet.getFilms() != null && !planet.getFilms().isEmpty() ? planet.getFilms().size() : 0));
+            	return planet.getFilms() != null && !planet.getFilms().isEmpty() ? planet.getFilms().size() : 0;
+            } 
+		} 
+		return 0;
+	}
+	
 	@PostMapping("/create")
 	public ResponseEntity<Planet> createNewPlanet(@RequestBody Planet planet) {
 		try {
@@ -42,7 +70,7 @@ public class PlanetController {
 			planet.setNumberMovies(filmsNumber);
 			return Optional
 			        .ofNullable( this.planetService.create(planet) )
-			        .map( newPlanet -> ResponseEntity.ok().body(newPlanet) ) 
+			        .map( newPlanet -> ResponseEntity.status(HttpStatus.CREATED).body(newPlanet) ) 
 			        .orElseGet( () -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build() );
 			
 		} catch (Exception e) {
@@ -57,7 +85,6 @@ public class PlanetController {
 				.ofNullable( this.planetService.findAll() )
 				.map( planetList -> ResponseEntity.ok().body(planetList) )
 				.orElseGet( () -> ResponseEntity.notFound().build() );
-		
 	}
 	
 	//TODO: find by name (usar UPPER)***
@@ -83,28 +110,9 @@ public class PlanetController {
 			this.planetService.deleteByIdPlanet(idPlanet);	
 			return ResponseEntity.status(HttpStatus.OK).build();
 		} catch (Exception e) {
-			log.error("Error create new planet: ", e);
+			log.error("Error to delete planet: ", e);
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-
-	private int getFilmsNumberFromStarWarsAPIByPlanetName(String nmPlanet) throws Exception {
-		StarWars api = StarWarsApi.getApi();
-		
-		Call<SWModel> planets = api.getPlanetByName(nmPlanet);
-		
-		Response<SWModel> response = planets.execute();
-		
-		if (response.isSuccessful()) {
-            SWModel data = response.body();
-            
-            if(data.getResults() != null && !data.getResults().isEmpty()) {
-            	
-            	PlanetSWAPI planet = data.getResults().get(0);
-                System.out.println("Planet: " + planet.getName() + " films: " + (planet.getFilms() != null && !planet.getFilms().isEmpty() ? planet.getFilms().size() : 0));
-            	return planet.getFilms() != null && !planet.getFilms().isEmpty() ? planet.getFilms().size() : 0;
-            } 
-		} 
-		return 0;
-	}
+	
 }

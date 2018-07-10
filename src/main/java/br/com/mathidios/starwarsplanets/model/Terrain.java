@@ -28,6 +28,14 @@ public class Terrain {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PLANET")
 	private Planet planet;
+	
+	public Terrain() {
+		
+	}
+	
+	public Terrain(String nmTerrain) {
+		this.nmTerrain = nmTerrain;
+	}
 
 	public Long getIdTerrain() {
 		return idTerrain;

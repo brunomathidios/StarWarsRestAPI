@@ -28,6 +28,14 @@ public class Climate {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_PLANET")
 	private Planet planet;
+	
+	public Climate() {
+		
+	}
+	
+	public Climate(String nmClimate) {
+		this.nmClimate = nmClimate;
+	}
 
 	public Long getIdClimate() {
 		return idClimate;
