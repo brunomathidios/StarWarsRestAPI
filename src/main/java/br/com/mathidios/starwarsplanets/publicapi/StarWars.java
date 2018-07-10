@@ -11,5 +11,8 @@ public interface StarWars {
     Call<SWModelList<PlanetPublicAPI>> getAllPlanets(@Query("page") Integer page);
 
     @GET("planets/{id}/")
-    Call<PlanetPublicAPI> getPlanet(@Path("id") int planetId);
+    Call<PlanetPublicAPI> getPlanetById(@Path("id") int planetId);
+    
+    @GET("planets/{name}/")
+    Call<SWModelList<PlanetPublicAPI>> getPlanetByName(@Query("name") String planetName);
 }

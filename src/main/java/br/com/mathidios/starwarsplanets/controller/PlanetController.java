@@ -2,6 +2,7 @@ package br.com.mathidios.starwarsplanets.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,13 +21,16 @@ public class PlanetController {
 	@Autowired
 	private PlanetService planetService;
 	
-	@GetMapping
-	public void getAllPlanetsPublicAPI() throws Exception{
+	@GetMapping("/{nmPlanet}")
+	public void getAllPlanetsPublicAPI(@PathVariable(name="nmPlanet") String nmPlanet) throws Exception{
 		StarWars api = StarWarsApi.getApi();
 		
-		Call<SWModelList<PlanetPublicAPI>> planets = api.getAllPlanets(null);
+		//Call<SWModelList<PlanetPublicAPI>> planets = api.getAllPlanets(null);
+		Call<SWModelList<PlanetPublicAPI>> planets = api.getPlanetByName(nmPlanet);
 		
 		Response<SWModelList<PlanetPublicAPI>> response = planets.execute();
+		
+		//Response<SWModelList<PlanetPublicAPI>> response = planets.execute();
 		
 		if (response.isSuccessful()) {
             SWModelList<PlanetPublicAPI> data = response.body();

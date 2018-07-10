@@ -10,6 +10,6 @@ br/com/mathidios/starwarsplanets/publicapi/StarWarsApi.class
 br/com/mathidios/starwarsplanets/service/PlanetService.class
 br/com/mathidios/starwarsplanets/model/Planet.class
 br/com/mathidios/starwarsplanets/controller/PlanetController.class
-br/com/mathidios/starwarsplanets/model/Climate.class
-br/com/mathidios/starwarsplanets/service/impl/PlanetServiceImpl.class
 br/com/mathidios/starwarsplanets/publicapi/StarWarsApi$1.class
+br/com/mathidios/starwarsplanets/service/impl/PlanetServiceImpl.class
+br/com/mathidios/starwarsplanets/model/Climate.class
