@@ -1,0 +1,23 @@
+-------------------------------------------------------------------------------
+Test set: br.com.mathidios.starwarsplanets.PlanetControllerTest
+-------------------------------------------------------------------------------
+Tests run: 12, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 9.257 s <<< FAILURE! - in br.com.mathidios.starwarsplanets.PlanetControllerTest
+findPlanetByName(br.com.mathidios.starwarsplanets.PlanetControllerTest)  Time elapsed: 0.13 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at br.com.mathidios.starwarsplanets.PlanetControllerTest.findPlanetByName(PlanetControllerTest.java:143)
+
+deletePlanetById(br.com.mathidios.starwarsplanets.PlanetControllerTest)  Time elapsed: 0.033 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<500>
+	at br.com.mathidios.starwarsplanets.PlanetControllerTest.deletePlanetById(PlanetControllerTest.java:176)
+
+findAllPlanets(br.com.mathidios.starwarsplanets.PlanetControllerTest)  Time elapsed: 0.016 s  <<< FAILURE!
+java.lang.AssertionError: 
+JSON path "$"
+Expected: a collection with size <2>
+     but: collection size was <1>
+	at br.com.mathidios.starwarsplanets.PlanetControllerTest.findAllPlanets(PlanetControllerTest.java:136)
+
+findPlanetById(br.com.mathidios.starwarsplanets.PlanetControllerTest)  Time elapsed: 0.013 s  <<< FAILURE!
+java.lang.AssertionError: Status expected:<200> but was:<404>
+	at br.com.mathidios.starwarsplanets.PlanetControllerTest.findPlanetById(PlanetControllerTest.java:160)
+

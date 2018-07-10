@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.collection.IsCollectionWithSize;
 import org.hamcrest.core.Is;
 import org.hamcrest.core.IsNull;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class PlanetControllerTest {
 	
 	private Planet getPlanetToCreateNotFoundInSWAPI() {
 		Planet planet = new Planet();
-		planet.setNmPlanet("Planet New");
+		planet.setNmPlanet("Planet ZeroX");
 		
 		List<Climate> climateList = new ArrayList<Climate>();
 		
@@ -105,20 +106,20 @@ public class PlanetControllerTest {
 		
 		List<Climate> climateList = new ArrayList<Climate>();
 		
-		Climate climate1 = new Climate("Climate one");
+		Climate climate1 = new Climate("Climate moon");
 		climateList.add(climate1);
 		
-		Climate climate2 = new Climate("Climate zero");
+		Climate climate2 = new Climate("Climate mars");
 		climateList.add(climate2);
 		
 		planet.setClimateList(climateList);
 		
 		List<Terrain> terrainList = new ArrayList<Terrain>();
 		
-		Terrain terrain1 = new Terrain("Terrain one");
+		Terrain terrain1 = new Terrain("Terrain earth");
 		terrainList.add(terrain1);
 		
-		Terrain terrain2 = new Terrain("Terrain zero");
+		Terrain terrain2 = new Terrain("Terrain beach");
 		terrainList.add(terrain2);
 		
 		planet.setTerrainList(terrainList);
@@ -131,7 +132,8 @@ public class PlanetControllerTest {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/planets"))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.content().contentType(this.contentType))
-			.andExpect(MockMvcResultMatchers.jsonPath("$", IsNull.notNullValue()));
+			.andExpect(MockMvcResultMatchers.jsonPath("$", IsNull.notNullValue()))
+			.andExpect(MockMvcResultMatchers.jsonPath("$", IsCollectionWithSize.hasSize(2)));
 	}
 	
 	@Test
@@ -146,18 +148,18 @@ public class PlanetControllerTest {
 	
 	@Test
 	public void findPlanetByInvalidName() throws Exception {
-		String nmPlanet = "ZeroXXX";
+		String nmPlanet = "Zero_XXX";
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/planets/name/" + nmPlanet))
 			.andExpect(MockMvcResultMatchers.status().isNotFound());
 	}
 	
 	@Test
 	public void findPlanetById() throws Exception {
-		int idPlanet = 3;
+		int idPlanet = 1;
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/planets/" + idPlanet))
 			.andExpect(MockMvcResultMatchers.status().isOk())
 			.andExpect(MockMvcResultMatchers.content().contentType(this.contentType))
-			.andExpect(MockMvcResultMatchers.jsonPath("$.nmPlanet", Is.is("Planet One")));
+			.andExpect(MockMvcResultMatchers.jsonPath("$.nmPlanet", Is.is("Yavin IV")));
 	}
 	
 	@Test
@@ -172,6 +174,14 @@ public class PlanetControllerTest {
 		int idPlanet = 1;
 		this.mockMvc.perform(MockMvcRequestBuilders.delete("/planets/delete/" + idPlanet))
 			.andExpect(MockMvcResultMatchers.status().isOk());
+	}
+	
+	@Test
+	public void findAllPlanetsAfterDeleting() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/planets"))
+			.andExpect(MockMvcResultMatchers.status().isOk())
+			.andExpect(MockMvcResultMatchers.content().contentType(this.contentType))
+			.andExpect(MockMvcResultMatchers.jsonPath("$", IsCollectionWithSize.hasSize(1)));
 	}
 	
 	@Test
