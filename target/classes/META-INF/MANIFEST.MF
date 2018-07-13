@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: StarWarsPlanets
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: brunomathidios-eds
+Implementation-Vendor-Id: mathidios.starswarsplanets
+Build-Jdk: 1.8.0_171
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/StarWarsPlanets
+Created-By: Maven Integration for Eclipse
+

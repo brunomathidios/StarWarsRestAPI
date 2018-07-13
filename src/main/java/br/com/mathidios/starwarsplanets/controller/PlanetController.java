@@ -36,6 +36,7 @@ public class PlanetController {
 	
 	@GetMapping("/films/{nmPlanet}")
 	public ResponseEntity<Integer> getNumberOfFilmsFromPlanetNameOnSWAPI(@PathVariable(name="nmPlanet") String nmPlanet) throws Exception{
+		//TODO: validation
 		return Optional
 		        .ofNullable( this.getFilmsNumberFromStarWarsAPIByPlanetName(nmPlanet) )
 		        .map( numberOfFilms -> ResponseEntity.ok().body(numberOfFilms) ) 
@@ -43,6 +44,7 @@ public class PlanetController {
 	}
 
 	private int getFilmsNumberFromStarWarsAPIByPlanetName(String nmPlanet) throws Exception {
+		//TODO: validation
 		StarWars api = StarWarsApi.getApi();
 		
 		Call<SWModel> planets = api.getPlanetByName(nmPlanet);
@@ -64,6 +66,7 @@ public class PlanetController {
 	
 	@PostMapping("/create")
 	public ResponseEntity<Planet> createNewPlanet(@RequestBody Planet planet) {
+		//TODO: validation
 		try {
 			
 			int filmsNumber = this.getFilmsNumberFromStarWarsAPIByPlanetName(planet.getNmPlanet());
@@ -87,9 +90,10 @@ public class PlanetController {
 				.orElseGet( () -> ResponseEntity.notFound().build() );
 	}
 	
-	//TODO: find by name (usar UPPER)***
+	//TODO: usar UPPER
 	@GetMapping("/name/{nmPlanet}")
 	public ResponseEntity<List<Planet>> getPlanetByName(@PathVariable(name="nmPlanet") String nmPlanet) {
+		//TODO: validation
 		return Optional
 				.ofNullable( this.planetService.findByNmPlanet(nmPlanet) )
 				.map( planetList -> ResponseEntity.ok().body(planetList) )
@@ -98,6 +102,7 @@ public class PlanetController {
 	
 	@GetMapping("/{idPlanet}")
 	public ResponseEntity<Planet> getPlanetById(@PathVariable(name="idPlanet") Long idPlanet) {
+		//TODO: validation
 		return Optional
 		        .ofNullable( this.planetService.findByIdPlanet(idPlanet) )
 		        .map( planet -> ResponseEntity.ok().body(planet) ) 
@@ -106,6 +111,7 @@ public class PlanetController {
 	
 	@DeleteMapping("/delete/{idPlanet}")
 	public ResponseEntity<?> deletePlanetById(@PathVariable(name="idPlanet") Long idPlanet) {
+		//TODO: validation
 		try {
 			this.planetService.deleteByIdPlanet(idPlanet);	
 			return ResponseEntity.status(HttpStatus.OK).build();
